@@ -146,28 +146,16 @@ const order: IOrder = {
 
 //constraints:
 
-function getLength<T extends { length: number }>(item: T) {
+function getLength2<T extends { length: number }>(item: T) {
   return item.length;
 }
 
-getLength("hello"); // Output: 5
-getLength([1, 2, 3]); // Output: 3
-
-//? keyof with generics:
-function getProperty<T, K extends keyof T>(obj: T, key: K) {
-  return obj[key];
-}
-
-const user10 = {
-  id: 1,
-  name: "Alice",
-  age: 30,
-};
-console.log(getProperty(user10, "name")); // Output: Alice
+getLength2("hello"); // Output: 5
+getLength2([1, 2, 3]); // Output: 3
 
 //Default generic:
 
-function createArray<T = number>(lenght: number, value: t): T[] {
+function createArray<T = number>(lenght: number, value: T): T[] {
   return [value];
 }
 
