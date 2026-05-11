@@ -22,5 +22,11 @@
     "name": "Portable Power Bank",
     "description": "20000mAh fast-charging power bank with dual USB ports and LED battery indicator.",
     "price": 2800
+  },
+  {
+    "id": 1778526781997,
+    "name": "Full HD Webcam",
+    "description": "1080p USB webcam with built-in microphone and auto-focus for video conferencing and streaming.",
+    "price": 3900
   }
 ]
