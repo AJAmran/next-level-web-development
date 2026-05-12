@@ -1,11 +1,5 @@
 [
   {
-    "id": 1,
-    "name": "Wireless Bluetooth Headphones",
-    "description": "High-quality over-ear wireless headphones with noise cancellation and up to 30 hours of battery life.",
-    "price": 4500
-  },
-  {
     "id": 2,
     "name": "Smart Fitness Tracker",
     "description": "Water-resistant fitness tracker with heart rate monitoring, sleep tracking, and step counter.",

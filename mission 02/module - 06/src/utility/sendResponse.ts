@@ -1,13 +1,22 @@
 import type { ServerResponse } from "http";
 
-export const sendResponse = (res: ServerResponse) => {
-const response = 
+export const sendResponse = (
+  res: ServerResponse,
+  statusCode: number,
+  success: boolean,
+  message: string,
+  data?: unknown,
+) => {
+  res.writeHead(statusCode, {
+    "content-type": "application/json",
+  });
 
-  res.writeHead(404, { "content-type": "application/json" });
   res.end(
     JSON.stringify({
-      message: "Product not found",
-      data: { product },
+      success,
+      statusCode,
+      message,
+      data: data ?? null,
     }),
   );
 };
