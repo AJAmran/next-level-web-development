@@ -10,7 +10,7 @@ const getUserFromDB = async () => {
   return result;
 };
 
-const getUserByIdFromDB = async (id: IUser["id"]) => {
+const getUserByIdFromDB = async (id: string) => {
   const result = await pool.query(
     `
       SELECT * FROM users WHERE id = $1`,
@@ -31,7 +31,7 @@ const createUserIntoDB = async (payload: IUser) => {
   return result;
 };
 
-const updateUserIntoDB = async (id: IUser["id"], payload: Partial<IUser>) => {
+const updateUserIntoDB = async (id: string, payload: IUser) => {
   const { name, password, age, is_active } = payload;
   const result = await pool.query(
     `
@@ -48,7 +48,7 @@ const updateUserIntoDB = async (id: IUser["id"], payload: Partial<IUser>) => {
   return result;
 };
 
-const deleteUserFromDB = async (id: IUser["id"]) => {
+const deleteUserFromDB = async (id: string) => {
   const result = await pool.query(
     `
       DELETE FROM users

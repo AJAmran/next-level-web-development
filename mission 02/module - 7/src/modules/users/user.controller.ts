@@ -1,10 +1,6 @@
 import type { Request, Response } from "express";
-import type { IUser } from "./user.interface";
+import { pool } from "../../db";
 import { userService } from "./user.service";
-
-type UserIdParams = {
-  id: IUser["id"];
-};
 
 const getUsers = async (req: Request, res: Response) => {
   try {
@@ -22,10 +18,10 @@ const getUsers = async (req: Request, res: Response) => {
   }
 };
 
-const getUser = async (req: Request<UserIdParams>, res: Response) => {
+const getUser = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
-    const result = await userService.getUserByIdFromDB(id);
+    const result = await userService.getUserByIdFromDB(id as string);
     if (result.rows.length === 0) {
       res.status(404).json({
         status: "fail",
@@ -62,10 +58,10 @@ const createUser = async (req: Request, res: Response) => {
   }
 };
 
-const updateUser = async (req: Request<UserIdParams>, res: Response) => {
+const updateUser = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
-    const result = await userService.updateUserIntoDB(id, req.body);
+    const result = await userService.updateUserIntoDB(id as string, req.body);
     if (result.rows.length === 0) {
       res.status(404).json({
         status: "fail",
@@ -86,10 +82,10 @@ const updateUser = async (req: Request<UserIdParams>, res: Response) => {
   }
 };
 
-const deleteUser = async (req: Request<UserIdParams>, res: Response) => {
+const deleteUser = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
-    const result = await userService.deleteUserFromDB(id);
+    const result = await userService.deleteUserFromDB(id as string);
 
     if (result.rowCount === 0) {
       res.status(404).json({
