@@ -7,7 +7,7 @@ const getUsers = async (req: Request, res: Response) => {
     res.status(200).json({
       status: "success",
       message: "Users Retrive Successfully",
-      data: result.rows[0],
+      data: result.rows,
     });
   } catch (error: any) {
     res.status(500).json({
