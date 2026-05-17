@@ -6,7 +6,7 @@ const getUsers = async (req: Request, res: Response) => {
     const result = await userService.getUserFromDB();
     res.status(200).json({
       status: "success",
-      message: "Users Retrive Successfully",
+      message: "Users Retrieve Successfully",
       data: result.rows,
     });
   } catch (error: any) {
@@ -29,7 +29,7 @@ const getUser = async (req: Request, res: Response) => {
     } else {
       res.status(200).json({
         status: "success",
-        message: "User Retrive Successfully",
+        message: "User Retrieve Successfully",
         data: result.rows[0],
       });
     }
