@@ -9,7 +9,8 @@ import { pool } from "../db";
 //4. if the user active or not?
 //
 
-const auth = () => {
+const auth = (...roles: any) => {
+    console.log("rolesss from authmiddlware",roles);
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       const authHeader = req.headers.authorization;
@@ -33,7 +34,7 @@ const auth = () => {
 
       const userData = await pool.query(
         `
-        SELECT id, email, is_active FROM users WHERE id = $1
+        SELECT id, email, role, name, is_active FROM users WHERE id = $1
         `,
         [decodedToken.id],
       );
@@ -53,6 +54,15 @@ const auth = () => {
         });
       }
 
+      //role based access control
+      if(roles.length > 0 && !roles.includes(user.role)){
+        return res.status(403).json({
+          status: "fail",
+          message: "Forbidden",
+        });
+      }
+
+      //? attach the user to the request object
       req.user = user;
       next();
     } catch (error) {
