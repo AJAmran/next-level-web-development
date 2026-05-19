@@ -2,6 +2,7 @@ import type { NextFunction, Request, Response } from "express";
 import jwt, { type JwtPayload } from "jsonwebtoken";
 import config from "../config";
 import { pool } from "../db";
+import type { UserRole } from "../types";
 
 //1. check if the token exists
 //2. verify the token
@@ -9,7 +10,7 @@ import { pool } from "../db";
 //4. if the user active or not?
 //
 
-const auth = (...roles: any) => {
+const auth = (...roles: UserRole[]) => {
     console.log("rolesss from authmiddlware",roles);
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
