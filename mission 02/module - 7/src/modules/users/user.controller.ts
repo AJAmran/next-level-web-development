@@ -2,6 +2,7 @@ import type { Request, Response } from "express";
 import { userService } from "./user.service";
 
 const getUsers = async (req: Request, res: Response) => {
+      console.log(req.user)
   try {
     const result = await userService.getUserFromDB();
     res.status(200).json({
