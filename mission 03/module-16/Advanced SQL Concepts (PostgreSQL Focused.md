@@ -1,5 +1,4 @@
 # Advanced SQL Concepts (PostgreSQL Focused)
-
 ---
 
 ### 16-4: Subquery Basics
@@ -16,8 +15,6 @@ FROM employees
 WHERE salary > (SELECT AVG(salary) FROM employees);
 
 ```
-
-
 
 ```
 
