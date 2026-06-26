@@ -4,6 +4,11 @@ import config from "../../config";
 import { CreateUserPayload } from "./user.interface";
 
 
+
+
+
+
+
 //register user
 const createUserIntoDb = async(payload: CreateUserPayload)=>{
     const { email, name, password, profilePhoto } = payload;
@@ -24,16 +29,25 @@ const createUserIntoDb = async(payload: CreateUserPayload)=>{
 
   //create the user
   const createdUser = await prisma.user.create({
-    data: { email, name, password: hashedPassword },
+    data: { 
+      email, 
+      name, 
+      password: 
+      hashedPassword,
+    profile: {
+      create: {
+        profilePhoto: profilePhoto
+      }
+    }},
   });
 
   //create profile
-  await prisma.profile.create({
-    data: {
-      userId: createdUser.id,
-      profilePhoto,
-    },
-  });
+  // await prisma.profile.create({
+  //   data: {
+  //     userId: createdUser.id,
+  //     profilePhoto,
+  //   },
+  // });
 
   const user = await prisma.user.findUnique({
     where: {
