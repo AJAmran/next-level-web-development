@@ -12,9 +12,15 @@ const createToken = (
 const verifyToken = (token: string, secret: string) => {
   try {
     const decoded = jwt.verify(token, secret);
-    return decoded;
-  } catch (error : any) {
-    throw new Error(error.message);
+    return {
+      success: true,
+      data: decoded,
+    }
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error.message
+    }
   }
 };
 
