@@ -2,7 +2,8 @@ import { prisma } from "../../lib/prisma";
 import bcrypt from "bcrypt";
 import config from "../../config";
 import { CreateUserPayload } from "./user.interface";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload, SignOptions } from "jsonwebtoken";
+import { JwtUtils } from "../../utils/jwt";
 
 //register user
 const createUserIntoDb = async (payload: CreateUserPayload) => {

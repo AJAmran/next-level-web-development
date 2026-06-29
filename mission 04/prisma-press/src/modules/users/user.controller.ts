@@ -3,9 +3,6 @@ import { UserService } from "./user.service";
 import { catchAsync } from "../../utils/catchAsync";
 import { NextFunction, Request, Response } from "express";
 import { sendResponse } from "../../utils/sendResponse";
-import config from "../../config";
-import jwt from "jsonwebtoken";
-import { JwtUtils } from "../../utils/jwt";
 
 const createUser = catchAsync(async (req: Request, res: Response) => {
   const payload = req.body;
@@ -20,6 +17,8 @@ const createUser = catchAsync(async (req: Request, res: Response) => {
     },
   });
 });
+
+
 
 const getMyProfile = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
