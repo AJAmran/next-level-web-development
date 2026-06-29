@@ -33,7 +33,18 @@ const getAllPosts = catchAsync(
 );
 
 const getPostById = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {},
+  async (req: Request, res: Response, next: NextFunction) => {
+    const postId = req.params.postId;
+
+    const result = await PostService.getPostByIdFromDb(postId as string);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Post fetched successfully",
+      data: result,
+    });
+  },
 );
 
 const updatePost = catchAsync(
@@ -45,7 +56,18 @@ const deletePost = catchAsync(
 );
 
 const getMyPosts = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {},
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.user?.id;
+
+    const result = await PostService.getMyPostsFromDb(userId as string);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "My posts fetched successfully",
+      data: result,
+    });
+  },
 );
 
 const getPostStats = catchAsync(
