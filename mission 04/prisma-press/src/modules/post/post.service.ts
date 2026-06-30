@@ -161,7 +161,65 @@ const getMyPostsFromDb = async (authorId: string) => {
   return result;
 };
 
-const getPostStatsFromDb = async () => {};
+const getPostStatsFromDb = async () => {
+  const transaction = await prisma.$transaction(async (tx) => {
+    const [
+      totalPosts,
+      totalPublishedPosts,
+      totalDraftPosts,
+      totalArchivedPosts,
+      totalComments,
+      totalApprovedComments,
+      totalRejectedComments,
+      totalPostViewsAggregate,
+    ] = await Promise.all([
+      await tx.post.count(),
+      await tx.post.count({
+        where: {
+          status: "PUBLISHED",
+        },
+      }),
+      await tx.post.count({
+        where: {
+          status: "DRAFT",
+        },
+      }),
+      await tx.post.count({
+        where: {
+          status: "ARCHIVED",
+        },
+      }),
+      await tx.comment.count(),
+      await tx.comment.count({
+        where: {
+          status: "APPROVED",
+        },
+      }),
+      await tx.comment.count({
+        where: {
+          status: "REJECTED",
+        },
+      }),
+      await tx.post.aggregate({
+        _sum: {
+          views: true,
+        },
+      }),
+    ]);
+
+    return {
+      totalPosts,
+      totalPublishedPosts,
+      totalDraftPosts,
+      totalArchivedPosts,
+      totalComments,
+      totalApprovedComments,
+      totalRejectedComments,
+      totalPostViewsAggregate,
+    };
+  });
+  return transaction;
+};
 
 const searchPostsFromDb = async () => {};
 

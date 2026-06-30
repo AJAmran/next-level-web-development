@@ -59,7 +59,12 @@ const updatePost = catchAsync(
 
     const payload = req.body;
 
-    const result = await PostService.updatePostInDb(postId as string, payload, id as string, isAdmin);
+    const result = await PostService.updatePostInDb(
+      postId as string,
+      payload,
+      id as string,
+      isAdmin,
+    );
 
     sendResponse(res, {
       success: true,
@@ -80,7 +85,11 @@ const deletePost = catchAsync(
       throw new Error("Post id is required!");
     }
 
-    const result = await PostService.deletePostFromDb(postId as string, id as string, isAdmin);
+    const result = await PostService.deletePostFromDb(
+      postId as string,
+      id as string,
+      isAdmin,
+    );
 
     sendResponse(res, {
       success: true,
@@ -107,7 +116,15 @@ const getMyPosts = catchAsync(
 );
 
 const getPostStats = catchAsync(
-  async (req: Request, res: Response, next: NextFunction) => {},
+  async (req: Request, res: Response, next: NextFunction) => {
+    const result = await PostService.getPostStatsFromDb();
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Post stats fetched successfully",
+      data: result,
+    });
+  },
 );
 
 const searchPosts = catchAsync(
