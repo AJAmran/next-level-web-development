@@ -1,3 +1,4 @@
+import { CommentStatus } from "../../../generated/prisma/enums";
 import { prisma } from "../../lib/prisma";
 import { ICreatePostPayload, IUpdatePostPayload } from "./post.interface";
 
@@ -31,25 +32,48 @@ const getPostsFromDb = async () => {
 };
 
 const getPostByIdFromDb = async (postId: string) => {
-  const updatedPost = await prisma.post.update({
-    where: {
-      id: postId,
-    },
-    data: {
-      views: {
-        increment: 1,
+  const transaction = await prisma.$transaction(async (tx) => {
+    await tx.post.update({
+      where: {
+        id: postId,
       },
-    },
-    include: {
-      author: {
-        omit: {
-          password: true,
+      data: {
+        views: {
+          increment: 1,
         },
       },
-      comments: true,
-    },
+    });
+    // throw new Error("fake error")
+    const post = await tx.post.findUniqueOrThrow({
+      where: {
+        id: postId,
+      },
+      include: {
+        author: {
+          omit: {
+            password: true,
+          },
+        },
+        comments: {
+          where: {
+            status: CommentStatus.APPROVED,
+          },
+          orderBy: {
+            createdAt: "desc",
+          },
+        },
+        _count: {
+          select: {
+            comments: true,
+          },
+        },
+      },
+    });
+
+    return post;
   });
-  return updatedPost;
+
+  return transaction;
 };
 
 const updatePostInDb = async (
@@ -91,23 +115,23 @@ const deletePostFromDb = async (
   authorId: string,
   isAdmin: boolean,
 ) => {
-    const post = await prisma.post.findUniqueOrThrow({
-        where: {
-            id: postId,
-        }
-    })
+  const post = await prisma.post.findUniqueOrThrow({
+    where: {
+      id: postId,
+    },
+  });
 
-    if(!isAdmin && post.authorId !== authorId){
-        throw new Error("You are not authorized to delete this post!");
-    }
+  if (!isAdmin && post.authorId !== authorId) {
+    throw new Error("You are not authorized to delete this post!");
+  }
 
-    const result = await prisma.post.delete({
-        where: {
-            id: postId,
-        }
-    })
+  const result = await prisma.post.delete({
+    where: {
+      id: postId,
+    },
+  });
 
-    return result;
+  return result;
 };
 
 const getMyPostsFromDb = async (authorId: string) => {
