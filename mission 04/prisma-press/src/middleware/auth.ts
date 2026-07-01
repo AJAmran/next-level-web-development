@@ -32,9 +32,9 @@ export const auth = (...requiredRoles: Role[]) => {
 
     const varifiedToken = JwtUtils.verifyToken(token, config.JWT_ACCESS_SECRET);
     if (!varifiedToken.success) {
-      throw new Error(varifiedToken.message);
+      throw new Error(varifiedToken.error?.message || "Invalid token");
     }
-
+    
     const payload = varifiedToken.data;
     if (!payload || typeof payload === "string") {
       throw new Error("Invalid token payload");
