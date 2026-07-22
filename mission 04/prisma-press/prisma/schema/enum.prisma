@@ -1,12 +1,11 @@
 enum ActiveStatus {
-  ACTIVE
-  BLOCKED
+    ACTIVE
+    BLOCKED
 }
 
 enum Role {
-  USER
-  AUTHOR
-  ADMIN
+    USER
+    ADMIN
 }
 
 enum PostStatus {
@@ -15,13 +14,7 @@ enum PostStatus {
   ARCHIVED
 }
 
-enum CommentStatus {
-  APPROVED
-  REJECT
-}
-
-enum SubscriptionStatus{
-  ACTIVE
-  CANCELED
-  EXPIRED
+enum CommentStatus{
+    APPROVED
+    REJECTED
 }

@@ -31,6 +31,30 @@ const loginUser = async (payload: LoginUserPayload) => {
   return { accessToken, refreshToken };
 };
 
+const refreshToken = async (token: string) => {
+  const decoded = JwtUtils.verifyToken(token, config.jwt_refresh_secret);
+
+  if (!decoded.success) {
+    throw new Error("Invalid or expired refresh token");
+  }
+
+  const user = await prisma.user.findUniqueOrThrow({
+    where: { id: (decoded.data as any).id },
+  });
+
+  const jwtPayload = {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+  };
+
+  const accessToken = JwtUtils.createToken(jwtPayload, config.jwt_access_secret, config.jwt_access_expires_in);
+
+  return { accessToken };
+};
+
 export const AuthService = {
   loginUser,
+  refreshToken,
 };
