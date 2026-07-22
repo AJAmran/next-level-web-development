@@ -2,7 +2,7 @@ import { prisma } from "../../lib/prisma";
 import bcrypt from "bcrypt";
 import config from "../../config";
 import { CreateUserPayload } from "./user.interface";
-import jwt from "jsonwebtoken";
+
 
 //register user
 const createUserIntoDb = async (payload: CreateUserPayload) => {
@@ -19,7 +19,7 @@ const createUserIntoDb = async (payload: CreateUserPayload) => {
   //compress the password
   const hashedPassword = await bcrypt.hash(
     password,
-    Number(config.BCRYPT_SALT_ROUNDS),
+    Number(config.bcrypt_salt_rounds),
   );
 
   //create the user
@@ -47,7 +47,6 @@ const createUserIntoDb = async (payload: CreateUserPayload) => {
   const user = await prisma.user.findUnique({
     where: {
       id: createdUser.id,
-      email: createdUser.email,
     },
     omit: {
       password: true,

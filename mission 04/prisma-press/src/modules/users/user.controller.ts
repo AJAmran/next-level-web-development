@@ -23,17 +23,18 @@ const createUser = catchAsync(async (req: Request, res: Response) => {
 const getMyProfile = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const { accessToken } = req.cookies;
-    const verfiedToken = JwtUtils.verifyToken(
+    console.log(req.user, "User")
+    const verifiedToken = JwtUtils.verifyToken(
       accessToken,
-      config.JWT_ACCESS_SECRET,
+      config.jwt_access_secret,
     );
-    console.log("verfiedToken", verfiedToken);
+    console.log("verifiedToken", verifiedToken);
 
-    if (typeof verfiedToken === "string") {
-      throw new Error(verfiedToken);
+    if (!verifiedToken.success) {
+      throw new Error(verifiedToken.error);
     }
 
-    const profile = await UserService.getMyProfileFromDb(verfiedToken.id);
+    const profile = await UserService.getMyProfileFromDb((verifiedToken.data as any).id);
 
     sendResponse(res, {
       success: true,
