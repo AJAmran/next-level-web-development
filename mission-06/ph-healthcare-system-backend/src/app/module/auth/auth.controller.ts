@@ -114,9 +114,13 @@ const refreshToken = catchAsync(async (req: Request, res: Response) => {
 })
 
 
+const googleLogin = catchAsync(async (req: Request, res: Response) => {})
+
+
 export const AuthController = {
     registerPatient,
     loginUser,
     getMe,
     refreshToken,
+    googleLogin
 }
