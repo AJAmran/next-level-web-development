@@ -1,7 +1,12 @@
 import app from "./app";
 import config from "./app/config";
+import { redisClient } from "./app/config/redis";
 import { prisma } from "./app/lib/prisma";
-import { seedSuperAdmin, seedTesterAdmin, seedTesterDoctor } from "./app/utils/seed";
+import {
+  seedSuperAdmin,
+  seedTesterAdmin,
+  seedTesterDoctor,
+} from "./app/utils/seed";
 
 const PORT = config.port;
 
@@ -9,6 +14,8 @@ const main = async () => {
   try {
     await prisma.$connect();
     console.log("Connected to the database successfully.");
+    await redisClient.connect();
+    console.log("Redis Connected Successfully.");
     await seedSuperAdmin();
     await seedTesterAdmin();
     await seedTesterDoctor();
