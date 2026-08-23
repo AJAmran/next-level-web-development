@@ -8,6 +8,8 @@ import { globalErrorHandler } from "./app/middleware/globalErrorHandler";
 import { notFound } from "./app/middleware/notFound";
 import { redisClient } from "./app/config/redis";
 import crypto from "crypto";
+import { UserRoutes } from "./app/module/user/user.route";
+import { AppointementRoutes } from "./app/module/appointment/appointment.route";
 
 const app: Application = express();
 
@@ -26,12 +28,11 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/v1/auth", AuthRoutes);
+app.use("/api/v1/user", UserRoutes);
+app.use("/api/v1/appointment", AppointementRoutes);
 
 app.use("/test", async (req: Request, res: Response) => {
   try {
-
-
-
     const otp = crypto.randomInt(100000, 999999).toString();
     console.log("Generated OTP:", otp);
 
@@ -41,7 +42,6 @@ app.use("/test", async (req: Request, res: Response) => {
     //         value: 60 * 5,
     //     }
     // })
-
 
     res.status(httpStatus.OK).json({
       success: true,
