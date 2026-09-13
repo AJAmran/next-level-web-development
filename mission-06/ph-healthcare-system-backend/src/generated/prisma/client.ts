@@ -31,8 +31,8 @@ export * from "./enums"
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Appointments
- * const appointments = await prisma.appointment.findMany()
+ * // Fetch zero or more Apppointments
+ * const apppointments = await prisma.apppointment.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -42,10 +42,15 @@ export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts exten
 export { Prisma }
 
 /**
- * Model Appointment
+ * Model Apppointment
  * 
  */
-export type Appointment = Prisma.AppointmentModel
+export type Apppointment = Prisma.ApppointmentModel
+/**
+ * Model Doctor
+ * 
+ */
+export type Doctor = Prisma.DoctorModel
 /**
  * Model Patient
  * 
@@ -56,6 +61,11 @@ export type Patient = Prisma.PatientModel
  * 
  */
 export type Payment = Prisma.PaymentModel
+/**
+ * Model Schedule
+ * 
+ */
+export type Schedule = Prisma.ScheduleModel
 /**
  * Model User
  * 

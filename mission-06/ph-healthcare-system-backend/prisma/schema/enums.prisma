@@ -35,5 +35,17 @@ enum PaymentStatus {
   PAID
   FAILED
   CANCELLED
-  REFUNDE
+  REFUNDED
 }
+
+enum DoctorVerificationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum ScheduleStatus {
+  DRAFT
+  PUBLISHED
+}
+

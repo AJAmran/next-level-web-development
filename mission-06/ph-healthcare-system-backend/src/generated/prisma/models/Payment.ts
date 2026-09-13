@@ -320,7 +320,7 @@ export type PaymentWhereInput = {
   appointmentId?: Prisma.StringFilter<"Payment"> | string
   createdAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
-  appointment?: Prisma.XOR<Prisma.AppointmentScalarRelationFilter, Prisma.AppointmentWhereInput>
+  appointment?: Prisma.XOR<Prisma.ApppointmentScalarRelationFilter, Prisma.ApppointmentWhereInput>
 }
 
 export type PaymentOrderByWithRelationInput = {
@@ -342,7 +342,7 @@ export type PaymentOrderByWithRelationInput = {
   appointmentId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  appointment?: Prisma.AppointmentOrderByWithRelationInput
+  appointment?: Prisma.ApppointmentOrderByWithRelationInput
 }
 
 export type PaymentWhereUniqueInput = Prisma.AtLeast<{
@@ -367,7 +367,7 @@ export type PaymentWhereUniqueInput = Prisma.AtLeast<{
   refundedAt?: Prisma.StringNullableFilter<"Payment"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Payment"> | Date | string
-  appointment?: Prisma.XOR<Prisma.AppointmentScalarRelationFilter, Prisma.AppointmentWhereInput>
+  appointment?: Prisma.XOR<Prisma.ApppointmentScalarRelationFilter, Prisma.ApppointmentWhereInput>
 }, "id" | "merchantInvoiceNumber" | "bkashPaymentId" | "appointmentId">
 
 export type PaymentOrderByWithAggregationInput = {
@@ -438,7 +438,7 @@ export type PaymentCreateInput = {
   refundedAt?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  appointment: Prisma.AppointmentCreateNestedOneWithoutPaymentInput
+  appointment: Prisma.ApppointmentCreateNestedOneWithoutPaymentInput
 }
 
 export type PaymentUncheckedCreateInput = {
@@ -480,7 +480,7 @@ export type PaymentUpdateInput = {
   refundedAt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  appointment?: Prisma.AppointmentUpdateOneRequiredWithoutPaymentNestedInput
+  appointment?: Prisma.ApppointmentUpdateOneRequiredWithoutPaymentNestedInput
 }
 
 export type PaymentUncheckedUpdateInput = {
@@ -686,14 +686,6 @@ export type DecimalFieldUpdateOperationsInput = {
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
-export type NullableDecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
 export type PaymentCreateWithoutAppointmentInput = {
   id?: string
   status?: $Enums.PaymentStatus
@@ -811,7 +803,7 @@ export type PaymentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   appointmentId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  appointment?: boolean | Prisma.AppointmentDefaultArgs<ExtArgs>
+  appointment?: boolean | Prisma.ApppointmentDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["payment"]>
 
 export type PaymentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -833,7 +825,7 @@ export type PaymentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   appointmentId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  appointment?: boolean | Prisma.AppointmentDefaultArgs<ExtArgs>
+  appointment?: boolean | Prisma.ApppointmentDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["payment"]>
 
 export type PaymentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -855,7 +847,7 @@ export type PaymentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   appointmentId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  appointment?: boolean | Prisma.AppointmentDefaultArgs<ExtArgs>
+  appointment?: boolean | Prisma.ApppointmentDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["payment"]>
 
 export type PaymentSelectScalar = {
@@ -881,19 +873,19 @@ export type PaymentSelectScalar = {
 
 export type PaymentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "status" | "amount" | "currency" | "paymentGateway" | "merchantInvoiceNumber" | "bkashPaymentId" | "bkashTrxId" | "payerReference" | "paidAt" | "gatewayResponse" | "refundTrxId" | "refundAmount" | "refundReason" | "refundedAt" | "appointmentId" | "createdAt" | "updatedAt", ExtArgs["result"]["payment"]>
 export type PaymentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  appointment?: boolean | Prisma.AppointmentDefaultArgs<ExtArgs>
+  appointment?: boolean | Prisma.ApppointmentDefaultArgs<ExtArgs>
 }
 export type PaymentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  appointment?: boolean | Prisma.AppointmentDefaultArgs<ExtArgs>
+  appointment?: boolean | Prisma.ApppointmentDefaultArgs<ExtArgs>
 }
 export type PaymentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  appointment?: boolean | Prisma.AppointmentDefaultArgs<ExtArgs>
+  appointment?: boolean | Prisma.ApppointmentDefaultArgs<ExtArgs>
 }
 
 export type $PaymentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Payment"
   objects: {
-    appointment: Prisma.$AppointmentPayload<ExtArgs>
+    appointment: Prisma.$ApppointmentPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1308,7 +1300,7 @@ readonly fields: PaymentFieldRefs;
  */
 export interface Prisma__PaymentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  appointment<T extends Prisma.AppointmentDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AppointmentDefaultArgs<ExtArgs>>): Prisma.Prisma__AppointmentClient<runtime.Types.Result.GetResult<Prisma.$AppointmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  appointment<T extends Prisma.ApppointmentDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ApppointmentDefaultArgs<ExtArgs>>): Prisma.Prisma__ApppointmentClient<runtime.Types.Result.GetResult<Prisma.$ApppointmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

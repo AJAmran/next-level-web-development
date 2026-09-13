@@ -51,9 +51,11 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Appointment: 'Appointment',
+  Apppointment: 'Apppointment',
+  Doctor: 'Doctor',
   Patient: 'Patient',
   Payment: 'Payment',
+  Schedule: 'Schedule',
   User: 'User'
 } as const
 
@@ -73,14 +75,52 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const AppointmentScalarFieldEnum = {
+export const ApppointmentScalarFieldEnum = {
   id: 'id',
   status: 'status',
+  joiningTime: 'joiningTime',
+  serialNumber: 'serialNumber',
+  recordUrl: 'recordUrl',
+  recordPublicId: 'recordPublicId',
+  prescriptionUrl: 'prescriptionUrl',
+  prescriptionPublicId: 'prescriptionPublicId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  patientId: 'patientId',
+  doctorId: 'doctorId',
+  scheduleId: 'scheduleId'
 } as const
 
-export type AppointmentScalarFieldEnum = (typeof AppointmentScalarFieldEnum)[keyof typeof AppointmentScalarFieldEnum]
+export type ApppointmentScalarFieldEnum = (typeof ApppointmentScalarFieldEnum)[keyof typeof ApppointmentScalarFieldEnum]
+
+
+export const DoctorScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  address: 'address',
+  specialization: 'specialization',
+  licenseNumber: 'licenseNumber',
+  qualifications: 'qualifications',
+  experienceYears: 'experienceYears',
+  bio: 'bio',
+  consultationFee: 'consultationFee',
+  contactNumber: 'contactNumber',
+  verificationStatus: 'verificationStatus',
+  rejectionReason: 'rejectionReason',
+  reviewedBy: 'reviewedBy',
+  reviewedAt: 'reviewedAt',
+  resume: 'resume',
+  resumePublicId: 'resumePublicId',
+  additionalFiles: 'additionalFiles',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type DoctorScalarFieldEnum = (typeof DoctorScalarFieldEnum)[keyof typeof DoctorScalarFieldEnum]
 
 
 export const PatientScalarFieldEnum = {
@@ -121,6 +161,24 @@ export const PaymentScalarFieldEnum = {
 } as const
 
 export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+export const ScheduleScalarFieldEnum = {
+  id: 'id',
+  startDateTime: 'startDateTime',
+  endDateTime: 'endDateTime',
+  totalSlots: 'totalSlots',
+  availableSlots: 'availableSlots',
+  meetingLink: 'meetingLink',
+  status: 'status',
+  isDeleted: 'isDeleted',
+  deletedAt: 'deletedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  doctorId: 'doctorId'
+} as const
+
+export type ScheduleScalarFieldEnum = (typeof ScheduleScalarFieldEnum)[keyof typeof ScheduleScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
